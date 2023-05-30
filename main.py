@@ -6,6 +6,7 @@ from models.account import Account
 from utils.messages import (
     sucess_message, info_message, error_message
 )
+from utils.validations import validate_cpf, validate_email
 
 accounts: List[Account] = []
 
@@ -54,7 +55,9 @@ def create_account() -> None:
     
     name: str = str(input(info_message('Nome do Cliente: ')))
     email: str = str(input(info_message('E-mail do Cliente: ')))
+    validate_email(email, create_account)
     cpf: str = str(input(info_message('CPF do Cliente: ')))
+    validate_cpf(cpf, create_account)
     birth_date: str = str (input(
         info_message('Data de Nascimento do Cliente: ')
         )
