@@ -6,14 +6,16 @@ from models.account import Account
 from utils.messages import (
     sucess_message, info_message, error_message
 )
-from utils.validations import validate_cpf, validate_email
+from utils.validations import (
+    validate_input_cpf, validate_input_email
+)
 
 accounts: List[Account] = []
 
 def main() -> None:
     menu()
     
-def menu() -> None:
+def menu(self=None) -> None:
     print(20*'='+20*'='+20*'=')
     print(27*'='+sucess_message(' ATM ')+28*'=')
     print(23*'='+sucess_message(" Marin's Bank ")+23*'=')
@@ -52,16 +54,13 @@ def menu() -> None:
      
 def create_account() -> None:
     print(info_message('Informe os dados do cliente:'))
-    
-    name: str = str(input(info_message('Nome do Cliente: ')))
-    email: str = str(input(info_message('E-mail do Cliente: ')))
-    validate_email(email, create_account)
-    cpf: str = str(input(info_message('CPF do Cliente: ')))
-    validate_cpf(cpf, create_account)
+    name: str = str(input(info_message('Nome do Cliente: '))).strip()
+    email = validate_input_email()
+    cpf = validate_input_cpf()
     birth_date: str = str (input(
         info_message('Data de Nascimento do Cliente: ')
         )
-    )
+    ).strip()
     client: Client = Client(name, cpf, birth_date, email)
     account: account = Account(client)
     accounts.append(account)
