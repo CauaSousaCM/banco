@@ -143,7 +143,8 @@ def to_transfer() -> None:
                 ))
         else:
             print(error_message(
-                f'Não foi possivel encontrar uma conta com número {number_origin}.'
+                'Não foi possivel encontrar'\
+                f' uma conta com número {number_origin}.'
             ))
     else:
         print(error_message(
